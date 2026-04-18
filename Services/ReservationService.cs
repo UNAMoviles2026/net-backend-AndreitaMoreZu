@@ -55,11 +55,9 @@ public class ReservationService : IReservationService
   }
 
   public async Task<List<ReservationResponse>> GetByDateAsync(DateOnly date)
-{
+  {
     var reservations = await _reservationRepository.GetByDateAsync(date);
-    [cite_start]
     return reservations.Select(ReservationMapper.ToResponse).ToList();
-}
-
+  }
 
 }
