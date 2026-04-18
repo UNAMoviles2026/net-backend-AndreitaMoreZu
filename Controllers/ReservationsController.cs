@@ -62,4 +62,18 @@ public class ReservationsController : ControllerBase
       return StatusCode(500, new { message = "An unexpected error occurred while deleting the reservation." });
     }
   }
+
+  [HttpGet]
+  public async Task<IActionResult> GetByDate([FromQuery] DateOnly date)
+  {
+    try
+    {
+      var reservations = await _reservationService.GetByDateAsync(date);
+      return Ok(reservations);
+    }
+    catch (Exception)
+    {
+      return StatusCode(500, new { message = "An error occurred while retrieving reservations." });
+    }
+  }
 }
